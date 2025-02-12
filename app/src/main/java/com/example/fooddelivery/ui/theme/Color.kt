@@ -59,3 +59,17 @@ val extendedColors = AppColors(
     highlightSurface = Green,
     onHighlightSurface = Color.White
 )
+val extendedColorsd = AppColors(
+    backGround = Color.White,
+    onBackGround = Dark,
+    surface = Color.White,
+    onSurface = Dark,
+    secondarySurface = Pink,
+    onSecondarySurface = Pink,
+    regularSurface = YellowLight,
+    onRegularSurface = Dark,
+    actionSurface = Yellow,
+    onActionSurface = Pink,
+    highlightSurface = Green,
+    onHighlightSurface = Color.White
+)
