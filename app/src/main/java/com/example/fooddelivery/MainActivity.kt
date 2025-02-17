@@ -11,37 +11,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.fooddelivery.ui.theme.FoodDeliveryTheme
+import com.example.fooddelivery.data.ProductFlavorData
+import com.example.fooddelivery.data.ProductPreviewState
+import com.example.fooddelivery.ui.screen.ProductDetailScreen
+
+import com.example.fooddelivery.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            FoodDeliveryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+            AppTheme {
+                Scaffold { paddingValues ->
+                    ProductDetailScreen(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues),
+                        productPreviewState = ProductPreviewState(),
+                        productFlavor = ProductFlavorData
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FoodDeliveryTheme {
-        Greeting("Android")
     }
 }
