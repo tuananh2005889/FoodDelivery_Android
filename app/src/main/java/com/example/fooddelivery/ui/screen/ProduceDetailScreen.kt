@@ -15,6 +15,7 @@ import com.example.fooddelivery.data.ProductFlavorData
 import com.example.fooddelivery.data.ProductFlavorState
 import com.example.fooddelivery.data.ProductPreviewState
 import com.example.fooddelivery.ui.screen.components.FlavorSection
+import com.example.fooddelivery.ui.screen.components.ProductNutritionSection
 import com.example.fooddelivery.ui.screen.components.ProductPreviewSection
 import com.example.fooddelivery.ui.theme.AppTheme
 
@@ -39,6 +40,12 @@ fun ProductDetailScreen(
         FlavorSection(
             modifier = Modifier.padding(18.dp),
             data = productFlavor
+        )
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+        ProductNutritionSection(
+            modifier = Modifier.padding(horizontal = 18.dp)
         )
 
     }
