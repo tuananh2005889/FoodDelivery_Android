@@ -26,7 +26,7 @@ fun ProductHighlights(
     highlights: List<ProductHighlightState>
 ) {
     Column(
-        modifier = Modifier,
+        modifier = modifier,
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
@@ -54,13 +54,15 @@ Surface(
     Box(
         modifier = Modifier.padding(
           vertical = 10.dp,
-            horizontal = 12.dp
+            horizontal = 12.dp,
+
         )
     ) {
         Text(
             text = text,
             style = AppTheme.typography.titleSmall,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+
         )
     }
 }
@@ -81,7 +83,7 @@ private object HighlightDefaults {
 
         ProductHighlightType.SECONDARY -> HighlightColor(
             containerColor = AppTheme.color.actionSurface,
-            contentColor = AppTheme.color.actionSurface
+            contentColor = AppTheme.color.onActionSurface
         )
     }
 }
