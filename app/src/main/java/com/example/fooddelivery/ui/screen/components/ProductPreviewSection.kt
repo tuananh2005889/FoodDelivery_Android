@@ -22,6 +22,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProduceStateScope
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
@@ -82,16 +84,15 @@ private fun Content(
     ConstraintLayout (
        modifier = modifier.fillMaxWidth()
    ) {
-       val (actionBar, hightlights, productImg) = createRefs()
+       val (actionBar, highlights, productImg) = createRefs()
 
        ActionBar(
-
+           headline = state.headline,
            modifier = Modifier
                .padding(horizontal = 18.dp)
                .constrainAs(actionBar) {
                    top.linkTo(parent.top)
                },
-           headline = "Mr. tuan anh",
        )
         Image(painter = painterResource(id = R.drawable.buger),
             contentDescription = null,
@@ -105,21 +106,24 @@ private fun Content(
             )
         ProductHighlights(
             highlights = state.highLight,
-            modifier = Modifier.constrainAs(hightlights){
-                start.linkTo(anchor = parent.start, margin = 19.dp)
-                top.linkTo(productImg.top)
-            }
-
-
+            modifier = Modifier
+                .padding(horizontal = 19.dp) // Giữ khoảng cách ngang
+                .constrainAs(highlights) {
+                    start.linkTo(parent.start)  // Căn lề trái với parent
+                    top.linkTo(actionBar.bottom, margin = 10.dp) // Đặt bên dưới ActionBar
+                }
         )
 
-   }
+
+
+    }
 }
 
 @Composable
 private fun ActionBar(
-    modifier: Modifier = Modifier,
-    headline: String
+    headline: String,
+    modifier: Modifier = Modifier
+
 ) {
     Row (
         modifier = modifier.fillMaxWidth(),
@@ -129,7 +133,7 @@ private fun ActionBar(
         Text(
             text = headline,
             style = AppTheme.typography.headline,
-            color = AppTheme.color.onSecondarySurface
+            color = AppTheme.color.onSurface
         )
         CloseButton()
     }
@@ -159,5 +163,6 @@ private fun CloseButton(
 @Preview(showBackground = true)
 @Composable
 fun PreviewProductPreviewSection() {
-    ProductPreviewSection(state = ProductPreviewState())
+    val state = remember { mutableStateOf(ProductPreviewState()) }
+    ProductPreviewSection(state = state.value)
 }
