@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.fooddelivery.R
 import com.example.fooddelivery.data.OrderState
 import com.example.fooddelivery.ui.theme.AppTheme
@@ -144,27 +146,34 @@ fun Cart(
         modifier = modifier
             .clickable(onClick = onClicked)
             .fillMaxWidth(),
-        color = Color.Red,
+        color = AppTheme.color.actionSurface,
         contentColor = AppTheme.color.onSecondarySurface,
         shape = RoundedCornerShape(20.dp)
     ) {
         Row(
             modifier = Modifier
-//                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(
-                text = "Add to cart",
-                style = AppTheme.typography.titleSmall,
-                modifier = Modifier.padding(end = 8.dp)
-            )
-            Text(
-                text = totalPrice,
-                style = AppTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Add to cart",
+
+                    style = AppTheme.typography.titleSmall,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+                Text(
+                    text = totalPrice,
+                    fontSize = 16.sp,
+                    style = AppTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
         }
     }
 }
