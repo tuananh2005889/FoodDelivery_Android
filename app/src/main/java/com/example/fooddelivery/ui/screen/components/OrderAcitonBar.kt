@@ -1,11 +1,10 @@
 package com.example.fooddelivery.ui.screen.components
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,50 +19,47 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
-import androidx.compose.ui.layout.PinnableContainer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.fooddelivery.R
 import com.example.fooddelivery.data.OrderState
-
 import com.example.fooddelivery.ui.theme.AppTheme
 
 @Composable
 fun OrderActionBar(
     modifier: Modifier = Modifier,
     state: OrderState,
-    onAddItemClicked:() -> Unit,
-    onRemoveItemCLicked:() -> Unit,
-    onCheckoutClicked:() -> Unit
-
+    onAddItemClicked: () -> Unit,
+    onRemoveItemClicked: () -> Unit,
+    onCheckoutClicked: () -> Unit
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(28.dp),
+        shape = RoundedCornerShape(20.dp),
         color = AppTheme.color.surface,
         contentColor = AppTheme.color.onSurface,
         shadowElevation = 16.dp
     ) {
         Row(
-        modifier = modifier
-            .padding(8.dp)
-            .height(76.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier
+                .padding(8.dp)
+                .height(90.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Selector(
                 amount = state.amount,
                 onAddItemClicked = onAddItemClicked,
-                onRemoveItemCLicked = onRemoveItemCLicked,
-                modifier = Modifier.weight(weight = 1f)
+                onRemoveItemClicked = onRemoveItemClicked,
+                modifier = Modifier.weight(1f)
             )
             Cart(
                 totalPrice = state.totalPrice,
-                onClicked = onAddItemClicked,
-                modifier = Modifier.weight(weight = 1f)
+                onClicked = onCheckoutClicked,
+                modifier = Modifier.weight(1f)
             )
         }
     }
@@ -74,32 +70,28 @@ fun Selector(
     modifier: Modifier = Modifier,
     amount: Int,
     onAddItemClicked: () -> Unit,
-    onRemoveItemCLicked: () -> Unit,
-
-
+    onRemoveItemClicked: () -> Unit,
 ) {
-    Box(
-        modifier= Modifier
-            .fillMaxWidth()
-            .border(
-                width = 1.dp,
-                color = AppTheme.color.secondarySurface,
-                shape = RoundedCornerShape(20.dp)
-            ),
-        contentAlignment = Alignment.Center
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        border = BorderStroke(1.dp, AppTheme.color.secondarySurface)
     ) {
         Row(
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             SelectorButton(
                 iconRes = R.drawable.ic_minus,
                 containerColor = AppTheme.color.onActionSurface,
                 contentColor = AppTheme.color.actionSurface,
-                onClicked = onRemoveItemCLicked
+                onClicked = onRemoveItemClicked
             )
             Text(
-                text =  amount.toString(),
+                text = amount.toString(),
                 color = AppTheme.color.onSurface,
                 style = AppTheme.typography.titleLarge
             )
@@ -109,7 +101,6 @@ fun Selector(
                 contentColor = AppTheme.color.onSecondarySurface,
                 onClicked = onAddItemClicked
             )
-
         }
     }
 }
@@ -121,10 +112,9 @@ fun SelectorButton(
     containerColor: Color,
     contentColor: Color,
     onClicked: () -> Unit
-
 ) {
     Surface(
-        modifier = Modifier.size(24.dp),
+        modifier = Modifier.size(36.dp),
         shape = CircleShape,
         color = containerColor,
         contentColor = contentColor
@@ -134,48 +124,47 @@ fun SelectorButton(
                 .fillMaxSize()
                 .clickable(onClick = onClicked),
             contentAlignment = Alignment.Center
-
-        ){
-            Icon(painter = painterResource(id=iconRes),
+        ) {
+            Icon(
+                painter = painterResource(id = iconRes),
                 contentDescription = null,
-                modifier = Modifier.size(7.dp)
-
+                modifier = Modifier.size(16.dp)
             )
         }
     }
 }
 
 @Composable
-private fun Cart(
+fun Cart(
     modifier: Modifier = Modifier,
-    totalPrice:String,
+    totalPrice: String,
     onClicked: () -> Unit,
 ) {
     Surface(
-        modifier = modifier.clickable(onClick = onClicked),
-        color =AppTheme.color.secondarySurface,
+        modifier = modifier
+            .clickable(onClick = onClicked)
+            .fillMaxWidth(),
+        color = Color.Red,
         contentColor = AppTheme.color.onSecondarySurface,
         shape = RoundedCornerShape(20.dp)
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+        Row(
+            modifier = Modifier
+//                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-
-            ) {
-                Text(
-                    text = "Add to cart",
-                    style = AppTheme.typography.titleSmall
-                )
-                Text(
-                    text = totalPrice,
-                    style = AppTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            Text(
+                text = "Add to cart",
+                style = AppTheme.typography.titleSmall,
+                modifier = Modifier.padding(end = 8.dp)
+            )
+            Text(
+                text = totalPrice,
+                style = AppTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
         }
-
     }
 }

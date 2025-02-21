@@ -22,7 +22,7 @@ val ProductFlavorData = listOf(
     ), ProductFlavorState(
         imgRes = R.drawable.hanh,
         name = "Onion",
-        price = "$0,2"
+        price = "$0,1"
     ),
 
 )

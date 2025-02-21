@@ -107,10 +107,10 @@ private fun Content(
         ProductHighlights(
             highlights = state.highLight,
             modifier = Modifier
-                .padding(horizontal = 19.dp) // Giữ khoảng cách ngang
+                .padding(horizontal = 19.dp)
                 .constrainAs(highlights) {
-                    start.linkTo(parent.start)  // Căn lề trái với parent
-                    top.linkTo(actionBar.bottom, margin = 10.dp) // Đặt bên dưới ActionBar
+                    start.linkTo(parent.start)
+                    top.linkTo(actionBar.bottom, margin = 10.dp)
                 }
         )
 
