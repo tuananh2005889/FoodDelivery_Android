@@ -57,7 +57,7 @@ fun ProductDetailScreen(
         OrderActionBar(
             state = orderState,
             onAddItemClicked = onAddItemClicked,
-            onRemoveItemCLicked = onRemoveItemCLicked,
+            onRemoveItemClicked = onRemoveItemCLicked,
             onCheckoutClicked = onCheckoutClicked,
             modifier = Modifier
                 .navigationBarsPadding()
@@ -113,5 +113,6 @@ fun Content(
                 .padding(horizontal = 18.dp)
                 .padding(bottom = 128.dp)
         )
+
     }
 }
